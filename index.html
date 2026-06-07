@@ -376,32 +376,37 @@
 
 <script>
 const students = [
-  "aartipawar",
-  "amarjashinde",
-  "apurvaawasarmol",
-  "abhaytripathi",
-  "darshanatayade",
-  "dhanvantariwalkoli",
-  "dnyaneshwarnichal",
-  "pratikshachavan",
-  "vedantthakare",
-  "prasadkhile",
-  "sarthakkadam",
-  "pradipgaikwad",
-  "prajwaljagtap",
-  "mayankyadav",
-  "payalpardhe",
-  "rukminishirke",
-  "sawalidharne",
-  "shalugautam",
-  "pranitishinde",
-  "parvatiyadav",
-  "parvatikumbhar",
-  "shaguftaansari",
-  "priyakolte",
-  "siddhikedari"
+  { repo: "omkadam", image: "Om.jpeg" },
+  { repo: "priyakolte", image: "Priya.jpeg" },
+  { repo: "amarjashinde", image: "Amarja.jpeg" },
+  { repo: "shaguftaansari", image: "Shagufta.jpeg" },
+  { repo: "parvatikumbhar", image: "Parvati Kumbhar.jpeg" },
+  { repo: "akshatashinde", image: "Akshata.jpeg" },
+  { repo: "parvatiyadav", image: "Parvati Yadav.jpeg" },
+  { repo: "siddhigavari", image: "Siddhi Gavari.jpeg" },
+  { repo: "apurvaawasarmol", image: "Apoorva.jpeg" },
+  { repo: "pranitishinde", image: "Praniti.jpeg" },
+  { repo: "shalugautam", image: "Shalu.jpeg" },
+  { repo: "siddhikedari", image: "Siddhi Kedari.jpeg" },
+  { repo: "sawalidharne", image: "Sawali.jpeg" },
+  { repo: "darshanatayade", image: "Darshana.jpeg" },
+  { repo: "rukminishirke", image: "Rukmini.jpeg" },
+  { repo: "aartipawar", image: "Aarti.jpeg" },
+  { repo: "dhanvantariwalkoli", image: "Dhanvantari.jpeg" },
+  { repo: "payalpardhe", image: "Payal.jpeg" },
+  { repo: "mayankyadav", image: "Mayank.jpeg" },
+  { repo: "prajwaljagtap", image: "Prajwal.jpeg" },
+  { repo: "pradipgaikwad", image: "Pradip.jpeg" },
+  { repo: "dnyaneshwarnichal", image: "Dyaneshwar.jpeg" },
+  { repo: "abhaytripathi", image: "Abhay.jpeg" },
+  { repo: "sarthakkadam", image: "Sarthak.jpeg" },
+  { repo: "prasadkhile", image: "Prasad.jpeg" },
+  { repo: "vedantthakare", image: "Vedant.jpeg" },
+  { repo: "pratikshachavan", image: "Pratiksha.jpeg" },
+  { repo: "shrustisonawane", image: "Shrushti.jpeg" },
+  { repo: "payal", image: "Payal.jpeg" },
+  { repo: "sharvaribhosale", image: "Sharvari.jpeg" }
 ];
-
 const avatarColors = [
   '#E8F4FF',
   '#FFF0E8',
@@ -414,24 +419,42 @@ const avatarColors = [
 const grid = document.getElementById('studentGrid');
 
 students.forEach((student, index) => {
+
   const card = document.createElement('div');
   card.className = 'student-card';
 
   const color = avatarColors[index % avatarColors.length];
 
-  const displayName = student
-    .replace(/([a-z])([A-Z])/g, '$1 $2')
+  const displayName = student.repo
+    .replace(/-/g, ' ')
     .replace(/\b\w/g, c => c.toUpperCase());
 
+  const imageUrl =
+    `https://raw.githubusercontent.com/` +
+    `hp-ai-mahashala/${student.repo}/main/` +
+    encodeURIComponent(student.image);
+
   card.innerHTML = `
-    <div class="caricature-frame" style="background:${color};">
-      <div class="placeholder-text">👩‍🎓 Student</div>
+    <div class="caricature-frame"
+         style="background:${color};overflow:hidden;padding:0;border:none;">
+
+      <img
+        src="${imageUrl}"
+        alt="${displayName}"
+        style="
+          width:100%;
+          height:100%;
+          object-fit:cover;
+          border-radius:50%;
+        "
+        onerror="this.src='https://placehold.co/100x100?text=👤';"
+      />
     </div>
 
     <div class="student-name">${displayName}</div>
 
     <a class="website-link"
-       href="https://hp-ai-mahashala.github.io/${student}/"
+       href="https://hp-ai-mahashala.github.io/${student.repo}/"
        target="_blank">
        🌐 Visit Website
     </a>
@@ -439,6 +462,7 @@ students.forEach((student, index) => {
 
   grid.appendChild(card);
 });
+  
 function switchDay(n) {
   document.querySelectorAll('.day-panel').forEach(p => p.classList.remove('active'));
   document.querySelectorAll('.day-tab').forEach(t => t.classList.remove('active'));
