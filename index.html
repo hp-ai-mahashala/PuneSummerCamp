@@ -160,7 +160,7 @@
       </div>
       <div class="hero-meta-item">
         <div class="label">👩‍💻 Participants</div>
-        <div class="value">40 Young Innovators!</div>
+        <div class="value">24 Young Innovators!</div>
       </div>
     </div>
   </div>
@@ -324,7 +324,7 @@
   <div class="gallery-inner">
     <div class="section-tag">🎨 Our Stars</div>
     <h2 class="section-title">Meet the AI Innovators! 🌟</h2>
-    <p class="gallery-note">✏️ Each student gets their very own caricature portrait here! Click a card to visit their website — links go live after camp ends on 5th June.</p>
+    <p class="gallery-note"> 🌐 Explore websites built by our students during HP AI Mahashala.</p>
     <div class="gallery-grid" id="studentGrid"></div>
   </div>
 </div>
@@ -375,23 +375,70 @@
 </div>
 
 <script>
-const avatarColors = ['#E8F4FF','#FFF0E8','#E8FAF0','#F5EDFF','#FFF9E0','#FFE8F0'];
+const students = [
+  "aartipawar",
+  "amarjashinde",
+  "apurvaawasarmol",
+  "abhaytripathi",
+  "darshanatayade",
+  "dhanvantariwalkoli",
+  "dnyaneshwarnichal",
+  "pratikshachavan",
+  "vedantthakare",
+  "prasadkhile",
+  "sarthakkadam",
+  "pradipgaikwad",
+  "prajwaljagtap",
+  "mayankyadav",
+  "payalpardhe",
+  "rukminishirke",
+  "sawalidharne",
+  "shalugautam",
+  "pranitishinde",
+  "parvatiyadav",
+  "parvatikumbhar",
+  "shaguftaansari",
+  "priyakolte",
+  "siddhikedari"
+];
+
+const avatarColors = [
+  '#E8F4FF',
+  '#FFF0E8',
+  '#E8FAF0',
+  '#F5EDFF',
+  '#FFF9E0',
+  '#FFE8F0'
+];
+
 const grid = document.getElementById('studentGrid');
 
-for (let i = 1; i <= 40; i++) {
+students.forEach((student, index) => {
   const card = document.createElement('div');
   card.className = 'student-card';
-  const color = avatarColors[(i-1) % avatarColors.length];
+
+  const color = avatarColors[index % avatarColors.length];
+
+  const displayName = student
+    .replace(/([a-z])([A-Z])/g, '$1 $2')
+    .replace(/\b\w/g, c => c.toUpperCase());
+
   card.innerHTML = `
     <div class="caricature-frame" style="background:${color};">
-      <div class="placeholder-text">✏️ Caricature here</div>
+      <div class="placeholder-text">👩‍🎓 Student</div>
     </div>
-    <div class="student-name">Student ${i}</div>
-    <a class="website-link coming-soon" href="#">🌐 Coming Soon</a>
-  `;
-  grid.appendChild(card);
-}
 
+    <div class="student-name">${displayName}</div>
+
+    <a class="website-link"
+       href="https://hp-ai-mahashala.github.io/${student}/"
+       target="_blank">
+       🌐 Visit Website
+    </a>
+  `;
+
+  grid.appendChild(card);
+});
 function switchDay(n) {
   document.querySelectorAll('.day-panel').forEach(p => p.classList.remove('active'));
   document.querySelectorAll('.day-tab').forEach(t => t.classList.remove('active'));
